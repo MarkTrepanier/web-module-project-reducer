@@ -1,7 +1,7 @@
 import React from 'react';
 import { useReducer } from 'react';
 import reducer, {initialState} from './reducers';
-import { addOne, applyNumber, changeOperation } from './actions';
+import { addOne, applyNumber, changeOperation, clearDisplay, memoryAlt } from './actions';
 
 import './App.css';
 
@@ -23,6 +23,14 @@ function App() {
     dispatch(changeOperation(op))
   }
 
+  const handleClearClick = ()=> {
+    dispatch(clearDisplay())
+  }
+
+  const handleMemCLick = (f) => {
+    dispatch(memoryAlt(f))
+  }
+
   return (
     <div className="App">
       <nav className="navbar navbar-dark bg-dark">
@@ -40,9 +48,9 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton value={"M+"} onClick={()=>handleMemCLick('+')}/>
+              <CalcButton value={"MR"} onClick={()=>handleMemCLick('r')}/>
+              <CalcButton value={"MC"} onClick={()=>handleMemCLick('c')}/>
             </div>
 
             <div className="row">
@@ -70,7 +78,7 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton value={"CE"} onClick={()=>handleClearClick('+')}/>
             </div>
 
           </form>
